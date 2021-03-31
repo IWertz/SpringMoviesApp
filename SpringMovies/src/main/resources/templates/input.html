@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.whymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert New Movie</title>
+</head>
+<body>
+
+<form th:object="${newContact}" th:action="@{/update/{id}(id=${newContact.id})}" method=POST>
+Name: <input name="name" size="20" th:field="*{name}"><br />
+Rating: <input name="rating" size="10" th:field="*{rating}"><br />
+Review: <input name="review" size="20" th:field="*{review}"><br />
+<input name="submit" type="submit" value="submit" />
+</form>
+
+<a href="viewAll">View all Movies</a>
+</body>
+</html>
