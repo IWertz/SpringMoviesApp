@@ -3,10 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert New Movie</title>
+<script>
+  function checkForm(form)
+  {
+    // validation fails if the input is blank
+    if(form.name.value == "" || form.rating.value == 0 || form.review == "") {
+      alert("Error: a category is empty!");
+      return false;
+    }
+
+	if(form.rating.value > 5 || form.rating.value < 1) {
+		alert("Error: rating must be between 1 and 5!")
+		return false;
+	}
+
+    // regular expression to match only alphanumeric characters and spaces
+    var re = /^[\w ]+$/;
+
+    // validation fails if the input doesn't match our regular expression
+    if(!re.test(form.name.value)) {
+      alert("Error: Input contains invalid characters!");
+      form.inputfield.focus();
+      return false;
+    }
+
+    // validation was successful
+    return true;
+  }
+</script>
 </head>
 <body>
 
-<form th:object="${newContact}" th:action="@{/update/{id}(id=${newContact.id})}" method=POST>
+<form th:object="${newContact}" th:action="@{/update/{id}(id=${newContact.id})}" method=POST onsubmit="return checkForm(this)">
 Name: <input name="name" size="20" th:field="*{name}"><br />
 Rating: <input name="rating" size="10" th:field="*{rating}"><br />
 Review: <input name="review" size="20" th:field="*{review}"><br />
